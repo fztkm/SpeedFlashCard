@@ -27,6 +27,7 @@ object QuizDatabase {
                 "Test 3", listOf(
                     Quiz("30 + 1 ", "31", "add"),
                     Quiz("abc", "defg", "abdcefg"),
+                    Quiz("元号は", "令和", "平成の次"),
                     Quiz("元号は", "令和", "平成の次")
                 ), "first"
             )

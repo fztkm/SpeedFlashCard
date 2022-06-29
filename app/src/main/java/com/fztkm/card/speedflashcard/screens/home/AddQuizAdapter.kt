@@ -2,6 +2,7 @@ package com.fztkm.card.speedflashcard.screens.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,16 @@ class AddQuizAdapter : ListAdapter<Quiz, AddQuizAdapter.ViewHolder>(AddQuizDiffC
         fun bind(item: Quiz) {
             binding.quiz = item
             binding.executePendingBindings()
+            binding.answerInputText.setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE
+                    && item.question.isNotEmpty() && item.answer.isNotEmpty()
+                ) {
+                    //TODO データベースに追加する
+                    //（追加されると，ViewModelのquizzesが更新されて，新たなクイズ追加用アイテムの作成がトリガー(Fragmentにて)される）
+                    true
+                }
+                true
+            }
         }
 
         companion object {

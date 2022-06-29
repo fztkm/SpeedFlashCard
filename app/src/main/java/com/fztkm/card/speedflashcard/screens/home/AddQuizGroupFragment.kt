@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fztkm.card.speedflashcard.database.Quiz
 import com.fztkm.card.speedflashcard.databinding.AddQuizGroupFragmentBinding
 
-class AddQuizGroupFragment : Fragment() {
+class AddQuizGroupFragment(private val quizGroupId: Int) : Fragment() {
 
     private lateinit var viewModel: AddQuizGroupViewModel
 
@@ -21,14 +22,19 @@ class AddQuizGroupFragment : Fragment() {
         val binding = AddQuizGroupFragmentBinding.inflate(layoutInflater, container, false)
         val viewModel = ViewModelProvider(this).get(AddQuizGroupViewModel::class.java)
 
-        val adapter = AddQuizAdapter()
+        val adapter = AddQuizAdapter(quizGroupId)
         binding.quizList.adapter = adapter
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.quizList.layoutManager = manager
 
         viewModel.quizzes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                //空のQuizインスタンスによって，新規クイズ入力フォームを作成する
+                val list = if (it.size == 1) it else mutableListOf<Quiz>().apply {
+                    addAll(it)
+                    add(Quiz("", "", ""))
+                }
+                adapter.submitList(list)
             }
         })
         return binding.root

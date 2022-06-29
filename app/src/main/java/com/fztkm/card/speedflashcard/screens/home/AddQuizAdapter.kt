@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fztkm.card.speedflashcard.database.Quiz
 import com.fztkm.card.speedflashcard.databinding.ListItemAddQuizBinding
 
-class AddQuizAdapter : ListAdapter<Quiz, AddQuizAdapter.ViewHolder>(AddQuizDiffCallBack()) {
+class AddQuizAdapter(private val quizGroupId: Int) :
+    ListAdapter<Quiz, AddQuizAdapter.ViewHolder>(AddQuizDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -30,7 +31,7 @@ class AddQuizAdapter : ListAdapter<Quiz, AddQuizAdapter.ViewHolder>(AddQuizDiffC
                 if (actionId == EditorInfo.IME_ACTION_DONE
                     && item.question.isNotEmpty() && item.answer.isNotEmpty()
                 ) {
-                    //TODO データベースに追加する
+                    //TODO データベースに追加する(quizGroupId)
                     //（追加されると，ViewModelのquizzesが更新されて，新たなクイズ追加用アイテムの作成がトリガー(Fragmentにて)される）
                     true
                 }

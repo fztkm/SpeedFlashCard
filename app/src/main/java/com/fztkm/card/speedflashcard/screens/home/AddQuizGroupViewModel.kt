@@ -9,8 +9,9 @@ class AddQuizGroupViewModel : ViewModel() {
     private val _quizzes = MutableLiveData<List<Quiz>>()
     val quizzes: LiveData<List<Quiz>>
         get() = _quizzes
-    
+
     init {
+        //空の
         _quizzes.value = listOf(Quiz("", "", ""))
     }
 }

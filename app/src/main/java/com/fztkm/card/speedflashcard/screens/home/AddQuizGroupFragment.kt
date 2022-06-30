@@ -30,10 +30,11 @@ class AddQuizGroupFragment(private val quizGroupId: Int) : Fragment() {
         viewModel.quizzes.observe(viewLifecycleOwner, Observer {
             it?.let {
                 //空のQuizインスタンスによって，新規クイズ入力フォームを作成する
-                val list = if (it.size == 1) it else mutableListOf<Quiz>().apply {
-                    addAll(it)
-                    add(Quiz("", "", ""))
-                }
+                val list =
+                    if (viewModel.haveQuiz.value != true) it else mutableListOf<Quiz>().apply {
+                        addAll(it)
+                        add(Quiz("", "", ""))
+                    }
                 adapter.submitList(list)
             }
         })

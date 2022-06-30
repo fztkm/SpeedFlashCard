@@ -6,6 +6,7 @@ object QuizDatabase {
     init {
         quizGroupList.add(
             QuizGroup(
+                1,
                 "Test 1", listOf(
                     Quiz("1 + 1 ", "2", "add"),
                     Quiz("abcd", "efg", "abdcefg"),
@@ -15,6 +16,7 @@ object QuizDatabase {
         )
         quizGroupList.add(
             QuizGroup(
+                2,
                 "Test 2", listOf(
                     Quiz("1 + 20 ", "21", "add"),
                     Quiz("abcdefg", "hij", "abdcefg"),
@@ -24,6 +26,7 @@ object QuizDatabase {
         )
         quizGroupList.add(
             QuizGroup(
+                3,
                 "Test 3", listOf(
                     Quiz("30 + 1 ", "31", "add"),
                     Quiz("abc", "defg", "abdcefg"),

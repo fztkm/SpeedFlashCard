@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fztkm.card.speedflashcard.database.Quiz
 import com.fztkm.card.speedflashcard.databinding.ListItemAddQuizBinding
 
-class AddQuizAdapter(private val quizGroupId: Int) :
+class AddQuizAdapter(private val quizGroupId: Int, private val viewModel: AddQuizGroupViewModel) :
     ListAdapter<Quiz, AddQuizAdapter.ViewHolder>(AddQuizDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, viewModel, quizGroupId)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -21,7 +21,10 @@ class AddQuizAdapter(private val quizGroupId: Int) :
         holder.bind(item)
     }
 
-    class ViewHolder private constructor(val binding: ListItemAddQuizBinding) :
+    class ViewHolder private constructor(
+        private val binding: ListItemAddQuizBinding,
+        private val viewModel: AddQuizGroupViewModel, private val quizGroupId: Int
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Quiz) {
@@ -31,8 +34,11 @@ class AddQuizAdapter(private val quizGroupId: Int) :
                 if (actionId == EditorInfo.IME_ACTION_DONE
                     && item.question.isNotEmpty() && item.answer.isNotEmpty()
                 ) {
-                    //TODO データベースに追加する(quizGroupId)
+                    //TODO データベースに追加する
                     //（追加されると，ViewModelのquizzesが更新されて，新たなクイズ追加用アイテムの作成がトリガー(Fragmentにて)される）
+                    item.answer = binding.answerInputText.text.toString()
+                    item.question = binding.questionInputText.text.toString()
+                    viewModel.insertQuiz(item, quizGroupId)
                     true
                 }
                 true
@@ -40,10 +46,10 @@ class AddQuizAdapter(private val quizGroupId: Int) :
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, viewModel: AddQuizGroupViewModel, id: Int): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemAddQuizBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, viewModel, id)
             }
         }
     }

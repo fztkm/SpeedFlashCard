@@ -22,7 +22,7 @@ class AddQuizGroupFragment(private val quizGroupId: Int) : Fragment() {
         val binding = AddQuizGroupFragmentBinding.inflate(layoutInflater, container, false)
         val viewModel = ViewModelProvider(this).get(AddQuizGroupViewModel::class.java)
 
-        val adapter = AddQuizAdapter(quizGroupId)
+        val adapter = AddQuizAdapter(quizGroupId, viewModel)
         binding.quizList.adapter = adapter
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         binding.quizList.layoutManager = manager

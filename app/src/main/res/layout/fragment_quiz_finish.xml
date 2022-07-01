@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fztkm.card.speedflashcard.screens.quiz.QuizViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.quiz.QuizFinishFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/finishText"
+            android:text="@string/all_quiz_completed"
+            android:textAppearance="@style/TextAppearance.BodyText"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/numRestartText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/numRestartText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_space"
+            android:textAlignment="center"
+            tools:text="リスタートした回数: 5"
+            android:textAppearance="@style/TextAppearance.BodyText"
+            app:layout_constraintTop_toBottomOf="@id/finishText"
+            app:layout_constraintBottom_toTopOf="@id/solveTimeText" />
+
+        <TextView
+            android:id="@+id/solveTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            tools:text="経過時間: 10m20s"
+            android:textAppearance="@style/TextAppearance.BodyText"
+            app:layout_constraintTop_toBottomOf="@id/numRestartText"
+            app:layout_constraintBottom_toTopOf="@id/buttonLayout" />
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/normal_space"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/replayButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/restart_quiz"
+                android:layout_marginHorizontal="@dimen/large_space"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/endQuizButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/end_quiz"
+                android:layout_marginHorizontal="@dimen/large_space"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

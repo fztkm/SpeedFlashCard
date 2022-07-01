@@ -2,4 +2,7 @@
     <string name="app_name">SpeedFlashCard</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_card">次に進む</string>
+    <string name="check_answer_side">答えを見る</string>
+    <string name="back_to_start">もう一度</string>
 </resources>

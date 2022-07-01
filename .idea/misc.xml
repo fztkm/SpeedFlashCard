@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/add_quiz_group_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_quiz_answer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item_add_quiz.xml" value="0.246966552734375" />
         <entry key="app/src/main/res/layout/list_item_quiz_title.xml" value="0.15520833333333334" />
       </map>

@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text=""
+            android:text="@{viewModel.questionStrDisplay}"
             android:textAppearance="@style/TextAppearance.HeadText"
             tools:text="初代内閣総理大臣"
             app:layout_constraintTop_toTopOf="parent"

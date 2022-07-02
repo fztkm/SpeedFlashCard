@@ -4,7 +4,7 @@ data class QuizGroup(
     val id: Int,
     val name: String,
     val quizzes: List<Quiz>,
-    val genre: String
+    val genre: String,
 ) {
     val length: Int
         get() {

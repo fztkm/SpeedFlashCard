@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quiz_navigation"
+    app:startDestination="@id/quizStartFragment">
+
+    <fragment
+        android:id="@+id/quizStartFragment"
+        android:name="com.fztkm.card.speedflashcard.screens.quiz.QuizStartFragment"
+        android:label="QuizStartFragment">
+        <action
+            android:id="@+id/action_quizStartFragment_to_quizFragment"
+            app:destination="@id/quizFragment"
+            app:popUpTo="@id/quizStartFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.fztkm.card.speedflashcard.screens.quiz.QuizFragment"
+        android:label="QuizFragment">
+        <action
+            android:id="@+id/action_quizFragment_to_quizAnswerFragment"
+            app:destination="@id/quizAnswerFragment"
+            app:popUpTo="@id/quizStartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizAnswerFragment"
+        android:name="com.fztkm.card.speedflashcard.screens.quiz.QuizAnswerFragment"
+        android:label="QuizAnswerFragment">
+        <action
+            android:id="@+id/action_quizAnswerFragment_to_quizFragment"
+            app:destination="@id/quizFragment"
+            app:popUpTo="@id/quizStartFragment" />
+        <action
+            android:id="@+id/action_quizAnswerFragment_to_quizFinishFragment"
+            app:destination="@id/quizFinishFragment"
+            app:popUpTo="@id/quizStartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFinishFragment"
+        android:name="com.fztkm.card.speedflashcard.screens.quiz.QuizFinishFragment"
+        android:label="QuizFinishFragment">
+        <action
+            android:id="@+id/action_quizFinishFragment_to_quizStartFragment"
+            app:destination="@id/quizStartFragment"
+            app:popUpTo="@id/quizStartFragment" />
+    </fragment>
+</navigation>

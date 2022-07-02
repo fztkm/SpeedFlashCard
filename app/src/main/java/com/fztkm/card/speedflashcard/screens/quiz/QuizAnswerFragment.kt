@@ -1,10 +1,11 @@
 package com.fztkm.card.speedflashcard.screens.quiz
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.fztkm.card.speedflashcard.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +35,8 @@ class QuizAnswerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val viewModel: QuizViewModel by activityViewModels()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quiz_answer, container, false)
     }

@@ -9,11 +9,16 @@ import com.fztkm.card.speedflashcard.database.QuizGroup
 
 class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
 
+    private val _selectedQuizGroup = MutableLiveData<QuizGroup>()
+    val selectedQuizGrop: LiveData<QuizGroup>
+        get() = _selectedQuizGroup
+
     //TODO add dataSource via constructor
     //val database = dataSource
 
     //TODO get from database
-    private val _quizzez = MutableLiveData<List<Quiz>>()
+    private
+    val _quizzez = MutableLiveData<List<Quiz>>()
     val quizzez: LiveData<List<Quiz>>
         get() = _quizzez
 
@@ -54,4 +59,7 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
     val elapsedTime: LiveData<Long>
         get() = _elapsedTime
 
+    init {
+        _selectedQuizGroup.value = quizGroup
+    }
 }

@@ -1,11 +1,12 @@
 package com.fztkm.card.speedflashcard.screens.quiz
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fztkm.card.speedflashcard.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.fztkm.card.speedflashcard.databinding.FragmentQuizBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +23,7 @@ class QuizFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var binding: FragmentQuizBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,7 +37,10 @@ class QuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz, container, false)
+        val binding = FragmentQuizBinding.inflate(inflater)
+        val viewModel: QuizViewModel by activityViewModels()
+        binding.viewModel = viewModel
+        return binding.root
     }
 
     companion object {

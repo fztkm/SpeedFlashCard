@@ -11,7 +11,20 @@ class HomeViewModel : ViewModel() {
     val quizGroups: LiveData<List<QuizGroup>>
         get() = _quizGroups
 
+    private val _navigateToQuiz = MutableLiveData<Boolean>()
+    val navigateToQuiz: LiveData<Boolean>
+        get() = _navigateToQuiz
+
     init {
         _quizGroups.value = QuizDatabase.getAllQuiz()
     }
+
+    fun playQuiz(quizGroup: QuizGroup) {
+        _navigateToQuiz.value = true
+    }
+
+    fun playQuizCompleted(quizGroup: QuizGroup) {
+        _navigateToQuiz.value = false
+    }
+
 }

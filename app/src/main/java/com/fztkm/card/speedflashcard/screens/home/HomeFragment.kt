@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
             intent.putExtra(QUIZ_GROUP_KEY, quizGroup)
             startActivity(intent)
         }
+        
         val adapter = QuizGroupAdapter(onClickListener)
         binding.quizGroupList.adapter = adapter
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)

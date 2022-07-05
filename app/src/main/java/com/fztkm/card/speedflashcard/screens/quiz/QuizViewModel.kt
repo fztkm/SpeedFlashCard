@@ -10,17 +10,16 @@ import com.fztkm.card.speedflashcard.database.QuizGroup
 class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
 
     private val _selectedQuizGroup = MutableLiveData<QuizGroup>()
-    val selectedQuizGrop: LiveData<QuizGroup>
+    val selectedQuizGroup: LiveData<QuizGroup>
         get() = _selectedQuizGroup
 
     //TODO add dataSource via constructor
     //val database = dataSource
 
     //TODO get from database
-    private
-    val _quizzez = MutableLiveData<List<Quiz>>()
-    val quizzez: LiveData<List<Quiz>>
-        get() = _quizzez
+    private val _quizzes = MutableLiveData<List<Quiz>>()
+    val quizzes: LiveData<List<Quiz>>
+        get() = _quizzes
 
     private val _currentQuizIndex = MutableLiveData<Int>()
     val currentQuizIndex: LiveData<Int>
@@ -32,22 +31,18 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
         get() = _isReverseCard
 
     //表示したい問題文
-    val questionStrDisplay = Transformations.map(currentQuizIndex) {
-        it?.let { index ->
-            quizzez.value?.let { list ->
-                if (isReverseCard.value != true) list[index].answer
-                else list[index].question
-            }
+    var questionStrDisplay = Transformations.map(_currentQuizIndex) { index ->
+        quizzes.value?.let {
+            if (isReverseCard.value != true) it[index].question
+            else it[index].answer
         }
     }
 
     //表示したい答え
-    val answerStrDisplay = Transformations.map(currentQuizIndex) {
-        it?.let { index ->
-            quizzez.value?.let { list ->
-                if (isReverseCard.value != true) list[index].question
-                else list[index].answer
-            }
+    val answerStrDisplay = Transformations.map(currentQuizIndex) { index ->
+        quizzes.value?.let {
+            if (isReverseCard.value != true) it[index].answer
+            else it[index].question
         }
     }
 
@@ -60,6 +55,13 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
         get() = _elapsedTime
 
     init {
+        _isReverseCard.value = false
         _selectedQuizGroup.value = quizGroup
+        _quizzes.value = _selectedQuizGroup.value!!.quizzes
+        _currentQuizIndex.value = 0
+    }
+
+    fun startQuiz() {
+        _currentQuizIndex.value = 0
     }
 }

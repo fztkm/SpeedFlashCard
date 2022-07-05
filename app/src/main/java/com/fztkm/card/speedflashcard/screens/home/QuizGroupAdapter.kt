@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fztkm.card.speedflashcard.database.QuizGroup
 import com.fztkm.card.speedflashcard.databinding.ListItemQuizTitleBinding
 
-class QuizGroupAdapter :
+class QuizGroupAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<QuizGroup, QuizGroupAdapter.ViewHolder>(QuizGroupDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,8 +19,11 @@ class QuizGroupAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
     }
-    
+
     class ViewHolder private constructor(val binding: ListItemQuizTitleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -37,6 +40,10 @@ class QuizGroupAdapter :
             }
         }
     }
+
+    class OnClickListener(val clickListener: (quizGroup: QuizGroup) -> Unit) {
+        fun onClick(quizGroup: QuizGroup) = clickListener(quizGroup)
+    }
 }
 
 class QuizGroupDiffCallback : DiffUtil.ItemCallback<QuizGroup>() {
@@ -49,3 +56,4 @@ class QuizGroupDiffCallback : DiffUtil.ItemCallback<QuizGroup>() {
         return oldItem.name == newItem.name
     }
 }
+

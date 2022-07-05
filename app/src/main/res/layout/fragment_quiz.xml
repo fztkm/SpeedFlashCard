@@ -17,11 +17,23 @@
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
+            android:id="@+id/quizCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@{viewModel.currentQuizIndex+1+`問目`}"
+            tools:text="10問目"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
             android:id="@+id/questionText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text=""
+            android:text="@{viewModel.questionStrDisplay}"
             android:textAppearance="@style/TextAppearance.HeadText"
             tools:text="初代内閣総理大臣"
             app:layout_constraintTop_toTopOf="parent"

@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_space"
             android:textAlignment="center"
+            android:text="@{`リスタートした回数: `+ viewModel.restartNum}"
             tools:text="リスタートした回数: 5"
             android:textAppearance="@style/TextAppearance.BodyText"
             app:layout_constraintTop_toBottomOf="@id/finishText"

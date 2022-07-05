@@ -13,12 +13,13 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         val quizGroup = intent.getParcelableExtra<QuizGroup>(HomeFragment.QUIZ_GROUP_KEY)
-
+        //val quizGroup = QuizGroup(1, "エディ", listOf<Quiz>(), "x")
         quizGroup?.let {
             val viewModelFactory = QuizViewModelFactory(quizGroup)
             val viewModel = ViewModelProvider(this, viewModelFactory).get(
                 QuizViewModel::class.java
             )
         }
+        setContentView(binding.root)
     }
 }

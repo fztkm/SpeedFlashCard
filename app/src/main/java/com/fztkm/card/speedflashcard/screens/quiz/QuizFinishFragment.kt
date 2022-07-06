@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.fztkm.card.speedflashcard.databinding.FragmentQuizFinishBinding
 
 class QuizFinishFragment : Fragment() {
@@ -19,6 +20,15 @@ class QuizFinishFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.replayButton.setOnClickListener {
+            viewModel.onReplay()
+            this.findNavController().navigate(
+                QuizFinishFragmentDirections.actionQuizFinishFragmentToQuizStartFragment()
+            )
+        }
+        binding.endQuizButton.setOnClickListener {
+            activity?.finish()
+        }
         return binding.root
     }
 }

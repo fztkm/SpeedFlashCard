@@ -64,4 +64,9 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
     fun startQuiz() {
         _currentQuizIndex.value = 0
     }
+
+    fun showNextQuiz() {
+        _currentQuizIndex.value ?: return
+        _currentQuizIndex.value = _currentQuizIndex.value!! + 1
+    }
 }

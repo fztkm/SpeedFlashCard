@@ -32,6 +32,7 @@
             android:id="@+id/questionLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/large_space"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +46,8 @@
                 android:layout_gravity="center"
                 android:progressDrawable="@drawable/circular_progress_bar"
                 android:background="@drawable/circular_progress_background"
-                android:max="40"
-                android:progress="30"
+                android:max="@{viewModel.solveTimerDuration}"
+                android:progress="@{viewModel.solveRemainTime}"
                 android:rotation="-90"
                 android:indeterminate="false" />
 
@@ -54,16 +55,16 @@
                 android:id="@+id/questionText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@{viewModel.questionStrDisplay}"
                 android:textAppearance="@style/TextAppearance.HeadText"
                 android:textStyle="bold"
-                tools:text="初代内閣総理大臣"
-                android:layout_gravity="center"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/nextText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/nextText" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="初代内閣総理大臣" />
         </FrameLayout>
 
 

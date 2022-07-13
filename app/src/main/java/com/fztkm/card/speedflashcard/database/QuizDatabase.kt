@@ -31,7 +31,7 @@ object QuizDatabase {
                     Quiz("30 + 1 ", "31", "add"),
                     Quiz("abc", "defg", "abdcefg"),
                     Quiz("元号は", "令和", "平成の次"),
-                    Quiz("元号は", "令和", "平成の次")
+                    Quiz("Processingで使用されている言語", "Java", "平成の次")
                 ), "first"
             )
         )

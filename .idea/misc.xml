@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/drawable/circular_progress_bar.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/circular_progressbar_gray.xml" value="0.127" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.15520833333333334" />
@@ -10,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/add_quiz_group_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15520833333333334" />
-        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_quiz.xml" value="0.3198458574181118" />
         <entry key="app/src/main/res/layout/fragment_quiz_answer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_quiz_finish.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_quiz_start.xml" value="0.1" />

@@ -32,6 +32,15 @@ class QuizFragment : Fragment() {
             }
         })
 
+        viewModel.eventTimeUp.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                this.findNavController().navigate(
+                    QuizFragmentDirections.actionQuizFragmentToQuizAnswerFragment()
+                )
+                viewModel.onNavigateTimeUpCompleted()
+            }
+        })
+
         binding.nextText.setOnClickListener {
             viewModel.onNextQuiz()
         }

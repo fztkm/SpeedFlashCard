@@ -1,5 +1,6 @@
 package com.fztkm.card.speedflashcard.screens.quiz
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -59,9 +60,26 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
     val restartNum: LiveData<Int>
         get() = _restartNum
 
+    //全ての問題を解くのに経過している時間
     private val _elapsedTime = MutableLiveData<Long>()
     val elapsedTime: LiveData<Long>
         get() = _elapsedTime
+
+
+    private var _solveTimer = MutableLiveData<CountDownTimer?>()
+
+    private val _solveRemainTime = MutableLiveData<Int>()
+    val solveRemainTime: LiveData<Int>
+        get() = _solveRemainTime
+
+    //制限時間
+    private val _solveTimerDuration = MutableLiveData<Int>()
+    val solveTimerDuration: LiveData<Int>
+        get() = _solveTimerDuration
+
+    private val _eventTimeUp = MutableLiveData<Boolean>()
+    val eventTimeUp: LiveData<Boolean>
+        get() = _eventTimeUp
 
     init {
         initState()
@@ -75,6 +93,9 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
         _currentQuizIndex.value = 0
         _backWidthOnFail.value = 1
         _restartNum.value = 0
+        _solveTimerDuration.value = 5000
+        _solveRemainTime.value = _solveTimerDuration.value!! + 1
+        _eventTimeUp.value = false
     }
 
     fun setBackWidth(num: Int) {
@@ -83,12 +104,15 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
 
     fun startQuiz() {
         _currentQuizIndex.value = 0
+        setUpTimer()
     }
 
     fun onNextQuiz() {
-        currentQuizIndex.value ?: run { _currentQuizIndex.value = 0 }
-        _currentQuizIndex.value = _currentQuizIndex.value!! + 1
-        checkQuizFinished()
+        if (!checkQuizFinished()) {
+            currentQuizIndex.value ?: run { _currentQuizIndex.value = 0 }
+            _currentQuizIndex.value = _currentQuizIndex.value!!.plus(1)
+            setUpTimer()
+        }
     }
 
     fun onFailedQuiz() {
@@ -96,25 +120,66 @@ class QuizViewModel(val quizGroup: QuizGroup) : ViewModel() {
         currentQuizIndex.value ?: run { _currentQuizIndex.value = 0 }
         backWidthOnFail.value ?: return
         if (currentQuizIndex.value!! > backWidthOnFail.value!!) {
-            _currentQuizIndex.value = currentQuizIndex.value!! - backWidthOnFail.value!!
+            _currentQuizIndex.value = _currentQuizIndex.value!!.minus(backWidthOnFail.value!!)
         } else {
             _currentQuizIndex.value = 0
         }
+        setUpTimer()
     }
 
-    fun checkQuizFinished() {
-        currentQuizIndex.value ?: return
-        quizzes.value ?: return
-        if (currentQuizIndex.value!! >= quizzes.value!!.size - 1) {
+    private fun checkQuizFinished(): Boolean {
+        currentQuizIndex.value ?: return false
+        quizzes.value ?: return false
+        if (currentQuizIndex.value!! == quizzes.value!!.size - 1) {
             _eventFinishQuiz.value = true
+            return true
         }
+        return false
     }
 
     fun onQuizFinishedCompleted() {
         _eventFinishQuiz.value = false
     }
-    
+
     fun onReplay() {
         initState()
+        setUpTimer()
     }
+
+    private fun setUpTimer() {
+        _solveTimer.value?.let {
+            cancelTimer()
+        }
+
+        _solveRemainTime.value = _solveTimerDuration.value!! + 1
+        _solveTimerDuration.value ?: return
+        _solveTimer.value = object : CountDownTimer(
+            _solveTimerDuration.value!! * 1L, 1L
+        ) {
+            override fun onTick(millisUntilFinished: Long) {
+                _solveRemainTime.value = millisUntilFinished.toInt()
+            }
+
+            override fun onFinish() {
+                _solveRemainTime.value = 0
+                cancelTimer()
+                navigateTimeUp()
+            }
+        }
+        _solveTimer.value?.start()
+    }
+
+    private fun cancelTimer() {
+        _solveTimer.value?.cancel()
+        _solveTimer.value = null
+    }
+
+    private fun navigateTimeUp() {
+        _eventTimeUp.value = true
+    }
+
+    fun onNavigateTimeUpCompleted() {
+        _eventTimeUp.value = false
+    }
+
 }

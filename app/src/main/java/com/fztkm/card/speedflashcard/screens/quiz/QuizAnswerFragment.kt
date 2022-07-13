@@ -33,8 +33,6 @@ class QuizAnswerFragment : Fragment() {
                     QuizAnswerFragmentDirections.actionQuizAnswerFragmentToQuizFragment()
                 )
             }
-
-
         }
 
         binding.retryQuizText.setOnClickListener {
